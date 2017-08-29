@@ -1,0 +1,23 @@
+{
+  "name": "angular-wizard",
+  "version": "1.0.0",
+  "description": "Angular 1.5.8 Wizard",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/razvangoga/Angular-Wizard.git"
+  },
+  "author": "Razvan Goga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/razvangoga/Angular-Wizard/issues"
+  },
+  "homepage": "https://github.com/razvangoga/Angular-Wizard#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
