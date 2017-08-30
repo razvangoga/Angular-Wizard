@@ -3,6 +3,9 @@
     <div ng-transclude></div>
     <div>
         <button type="button" ng-click="onMovePrevious()"> &lt; Previous</button>
+        <select ng-change="onStepChanged()" ng-model="currentStep">
+            <option ng-repeat="s in steps">{{s}}</option>
+        </select>
         <button type="button" ng-click="onMoveNext()"> Next &gt;</button>
     </div>
 </div>

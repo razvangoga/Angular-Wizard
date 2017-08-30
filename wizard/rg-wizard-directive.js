@@ -32,6 +32,10 @@ var rgWizardDirective = {
                     setCurrentStep(scope.currentStepIndex - 1);
                 };
 
+                scope.onStepChanged = function() {
+                    setCurrentStep(scope.steps.indexOf(scope.currentStep));
+                };
+
                 scope.onMoveNext = function () {
                     if (scope.currentStepIndex === scope.steps.length - 1)
                         return;
