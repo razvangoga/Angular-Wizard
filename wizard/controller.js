@@ -13,8 +13,9 @@ var app = angular.module('wizardApp', ['summernote', 'googlechart', 'toastr'])
 app.directive(convertToNumberDirective.name, convertToNumberDirective.directive);
 app.directive(isolatedFormDirective.name, isolatedFormDirective.directive);
 
-//wizard diretive
+//wizard directives
 app.directive(rgWizardDirective.name, rgWizardDirective.directive);
+app.directive(rgWizardStepDirective.name, rgWizardStepDirective.directive);
 
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';

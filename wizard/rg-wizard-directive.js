@@ -3,12 +3,10 @@ var rgWizardDirective = {
     directive: function () {
         return {
             restrict: 'E',
-            scope: {
-                model: '=',
-                summernoteOptions: '<'
-            },
             replace: true,
-            templateUrl: '/wizard/rg-wizard-directive-template.html'
+            transclude:true,
+            templateUrl: '/wizard/rg-wizard-directive-template.html',
+            controller: function() {return {}}
         };
     }
 };
