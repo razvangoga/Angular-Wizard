@@ -8,7 +8,7 @@ var rgWizardDirective = {
                 summernoteOptions: '<'
             },
             replace: true,
-            templateUrl: '/wizard/rg-wizard-template.html'
+            templateUrl: '/wizard/rg-wizard-directive-template.html'
         };
     }
 };
