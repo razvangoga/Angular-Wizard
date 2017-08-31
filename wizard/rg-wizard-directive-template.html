@@ -20,13 +20,17 @@
                                 <span class="input-group-btn">
                                     <button type="button" ng-click="onMoveNext()" class="btn btn-circle-right btn-default"> Next &gt;</button>
                                 </span>
+                                <span class="input-group-btn">
+                                    <a href="javascript:;" class="btn btn btn-circle btn-icon-only red popovers" data-container="body" data-trigger="hover" data-placement="top"
+                                        data-content="{{unableToChangeStageDescription}}" data-original-title="" title="">
+                                                <i class="fa fa-warning"></i>
+                                    </a>                                    
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="portlet-body">
-                    <div ng-transclude class="row"></div>
-                </div>
+                <div class="portlet-body" ng-transclude></div>
             </div>
         </div>
     </div>

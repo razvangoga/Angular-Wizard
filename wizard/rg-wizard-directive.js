@@ -12,6 +12,7 @@ var rgWizardDirective = {
             link: function (scope, elem, attrs) {
                 scope.wizardName = attrs.wizardName;
                 scope.wizardDescription = attrs.wizardDescription;
+                scope.unableToChangeStageDescription = attrs.unableToChangeStageDescription;
 
                 scope.steps = [];
 
@@ -42,6 +43,8 @@ var rgWizardDirective = {
 
                     setCurrentStep(scope.currentStepIndex + 1);
                 };
+
+                elem.find('.popovers').popover();
             }
         };
     }
