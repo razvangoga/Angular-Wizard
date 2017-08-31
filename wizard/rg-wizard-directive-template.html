@@ -11,20 +11,20 @@
                     <div class="inputs">
                         <div class="portlet-input input-inline input-large">
                             <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button type="button" ng-click="onMovePrevious()" class="btn btn-circle-left btn-default"> &lt; Previous</button>
-                                </span>
-                                <select ng-change="onStepChanged()" ng-model="currentStep" class="form-control">
-                                    <option ng-repeat="s in steps">{{s}}</option>
-                                </select>
-                                <span class="input-group-btn">
-                                    <button type="button" ng-click="onMoveNext()" class="btn btn-circle-right btn-default"> Next &gt;</button>
-                                </span>
-                                <span class="input-group-btn">
+                                <span class="input-group-btn" ng-show="!canChangeStep">
                                     <a href="javascript:;" class="btn btn btn-circle btn-icon-only red popovers" data-container="body" data-trigger="hover" data-placement="top"
                                         data-content="{{unableToChangeStageDescription}}" data-original-title="" title="">
                                                 <i class="fa fa-warning"></i>
                                     </a>                                    
+                                </span>                                
+                                <span class="input-group-btn">
+                                    <button ng-disabled="!canChangeStep" type="button" ng-click="onMovePrevious()" class="btn btn-circle-left btn-default"> &lt; Previous</button>
+                                </span>
+                                <select ng-disabled="!canChangeStep" ng-change="onStepChanged()" ng-model="currentStep" class="form-control">
+                                    <option ng-repeat="s in steps">{{s}}</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button ng-disabled="!canChangeStep" type="button" ng-click="onMoveNext()" class="btn btn-circle-right btn-default"> Next &gt;</button>
                                 </span>
                             </div>
                         </div>

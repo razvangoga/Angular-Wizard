@@ -14,6 +14,8 @@ var rgWizardDirective = {
                 scope.wizardDescription = attrs.wizardDescription;
                 scope.unableToChangeStageDescription = attrs.unableToChangeStageDescription;
 
+                scope.canChangeStep = true;
+
                 scope.steps = [];
 
                 var setCurrentStep = function (index) {
