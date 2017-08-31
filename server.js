@@ -16,7 +16,12 @@ app.get('/load', function(req, res) {
     var model = {
         name : 'Kara Ben Nemsi',
         age : 33,
-        email : 'kara@ben.nemsi'
+        email : 'kara@ben.nemsi',
+        address : 'Krunska 51, Beograd 11000',
+        hobbys : [
+            'MTB Biking',
+            'Beer drinking'
+        ]
     };
 
     res.send(JSON.stringify(model));

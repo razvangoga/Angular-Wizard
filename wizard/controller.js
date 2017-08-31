@@ -33,4 +33,12 @@ app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $i
             console.error(arguments);
         }
     );
+
+    this.addHobby = function () {
+        $scope.model.hobbys.push('');
+    };
+
+    this.deleteHobby = function (index) {
+        $scope.model.hobbys.splice(index, 1);
+    };
 });

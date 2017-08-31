@@ -11,6 +11,14 @@
     <link href="/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="/content/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/content/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/content/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/content/plugins.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/content/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/content/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/content/layout3/css/custom.min.css" rel="stylesheet" type="text/css" />
+
     <link href="/content/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
 
@@ -32,20 +40,74 @@
     <script src="/wizard/controller.js" type="text/javascript"></script>
 </head>
 
-<body>
-    <div id="wizardContainer" ng-app="wizardApp" ng-controller="wizardController as c">
-        <rg-wizard data-wizard-name="Angular v1.5.8 Wizard">
-            <rg-wizard-step data-step-name="Step 1" data-model="model.name">
-                <summernote ng-model="model.name" config="options"></summernote>
-            </rg-wizard-step>
-            <rg-wizard-step data-step-name="Step 2" data-model="model.name">
-                <summernote ng-model="model.age" config="options"></summernote>
-            </rg-wizard-step>
-            <rg-wizard-step data-step-name="Step 3" data-model="model.name">
-                <summernote ng-model="model.email" config="options"></summernote>
-            </rg-wizard-step>
-        </rg-wizard>
+<body class="page-container-bg-solid">
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <!-- BEGIN PAGE HEAD-->
+            <div class="page-head">
+                <div class="container">
+                    <!-- BEGIN PAGE TITLE -->
+                    <div class="page-title">
+                        <h1>
+                            <small>POC for an Angular 1.5.8 Wizard with declarative, user customizable steps</small>
+                        </h1>
+                    </div>
+                    <!-- END PAGE TITLE -->
+                </div>
+            </div>
+            <!-- END PAGE HEAD-->
+            <!-- BEGIN PAGE CONTENT BODY -->
+            <div class="page-content">
+                <div class="container">
+                    <div class="page-content-inner">
+                        <div id="wizardContainer" ng-app="wizardApp" ng-controller="wizardController as c">
+                            <rg-wizard data-wizard-name="Angular v1.5.8 Wizard" data-wizard-description="with declarative, user customizable steps">
+                                <rg-wizard-step data-step-name="Name">
+                                    <input type="text" ng-model="model.name" required class="form-control" />
+                                </rg-wizard-step>
+                                <rg-wizard-step data-step-name="Age">
+                                    <input type="number" ng-model="model.age" required class="form-control" />
+                                </rg-wizard-step>
+                                <rg-wizard-step data-step-name="Email">
+                                    <input type="email" ng-model="model.email" required class="form-control" />
+                                </rg-wizard-step>
+                                <rg-wizard-step data-step-name="Address">
+                                    <summernote ng-model="model.address" config="options"></summernote>
+                                </rg-wizard-step>
+                                <rg-wizard-step data-step-name="Hobbys">
+                                    <button type="button" ng-click="c.addHobby()">Add</button>
+                                    <ng-form name="hobbysForm">
+                                        <div ng-repeat="h in model.hobbys" class="form-group" ng-class="{'has-error': hobbysForm.$invalid}">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input type="text" ng-model="h" required class="form-control" />
+                                                    <span ng-show="hobbysForm.h.$error.required" class="help-block">
+                                                        Required
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <a class="btn red btn-sm" ng-click="c.deleteHobby($index)">
+                                                        <i class="fa fa-remove"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </rg-wizard-step>
+                            </rg-wizard>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT BODY -->
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
     </div>
+    <!-- END CONTAINER -->
 </body>
 
 </html>

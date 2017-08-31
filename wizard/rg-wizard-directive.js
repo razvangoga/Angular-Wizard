@@ -7,11 +7,11 @@ var rgWizardDirective = {
             transclude: true,
             templateUrl: '/wizard/rg-wizard-directive-template.html',
             controller: function () {
-                return {
-                }
+                return {}
             },
             link: function (scope, elem, attrs) {
                 scope.wizardName = attrs.wizardName;
+                scope.wizardDescription = attrs.wizardDescription;
 
                 scope.steps = [];
 
@@ -20,7 +20,7 @@ var rgWizardDirective = {
                     scope.currentStep = scope.steps[index];
                 };
 
-                scope.registerStep = function(stepName) {
+                scope.registerStep = function (stepName) {
                     scope.steps.push(stepName);
                     setCurrentStep(0);
                 };
@@ -32,7 +32,7 @@ var rgWizardDirective = {
                     setCurrentStep(scope.currentStepIndex - 1);
                 };
 
-                scope.onStepChanged = function() {
+                scope.onStepChanged = function () {
                     setCurrentStep(scope.steps.indexOf(scope.currentStep));
                 };
 
