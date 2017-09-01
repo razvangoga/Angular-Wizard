@@ -28,6 +28,10 @@ var rgWizardDirective = {
                     setCurrentStep(0);
                 };
 
+                scope.setCanChangeStep = function(show) {
+                    scope.canChangeStep = show;
+                };
+
                 scope.onMovePrevious = function () {
                     if (scope.currentStepIndex === 0)
                         return;
