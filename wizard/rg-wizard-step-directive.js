@@ -33,7 +33,7 @@ var rgWizardStepDirective = {
                 };
 
                 scope.onLeaveStep = function () {
-                    scope.onLeaveCallback()
+                    scope.onLeaveCallback();
                     scope.getStepForm().$setPristine();
                     scope.$parent.setFormIsDirty(false);
                 };
