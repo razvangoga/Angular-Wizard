@@ -12,9 +12,13 @@ var rgWizardDirective = {
             link: function (scope, elem, attrs) {
                 scope.wizardName = attrs.wizardName;
                 scope.wizardDescription = attrs.wizardDescription;
-                scope.unableToChangeStageDescription = attrs.unableToChangeStageDescription;
+                
+                scope.stepFormOkDescription = attrs.stepFormOkDescription;
+                scope.stepFormUnsavedChangesDescription = attrs.stepFormUnsavedChangesDescription;
+                scope.stepFormErrorsDescription = attrs.stepFormErrorsDescription;
 
                 scope.canChangeStep = true;
+                scope.formIsDirty = false;
 
                 scope.steps = [];
 
@@ -30,6 +34,10 @@ var rgWizardDirective = {
 
                 scope.setCanChangeStep = function(show) {
                     scope.canChangeStep = show;
+                };
+
+                scope.setFormIsDirty = function(isDirty) {
+                    scope.formIsDirty = isDirty;
                 };
 
                 scope.onMovePrevious = function () {

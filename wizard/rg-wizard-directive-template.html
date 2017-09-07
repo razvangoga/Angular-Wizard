@@ -9,14 +9,31 @@
                         <span class="caption-helper">{{wizardDescription}}</span>
                     </div>
                     <div class="inputs">
+                        <div class="portlet-input input-inline input-xsmall">
+                            <div class="input-group">
+                                <span class="input-group-btn pull-right">
+                                    <a ng-show="canChangeStep && !formIsDirty" href="javascript:;" class="btn btn btn-circle btn-icon-only green popovers" data-container="body"
+                                        data-trigger="hover" data-placement="top" data-content="{{stepFormOkDescription}}"
+                                        data-original-title="" title="">
+                                        <i class="fa fa-check-circle"></i>
+                                    </a>
+                                    <a ng-show="canChangeStep && formIsDirty" href="javascript:;" class="btn btn btn-circle btn-icon-only btn-warning popovers" data-container="body"
+                                        data-trigger="hover" data-placement="top" data-content="{{stepFormUnsavedChangesDescription}}"
+                                        data-original-title="" title="">
+                                        <i class="fa fa-warning"></i>
+                                    </a>
+                                    <a ng-show="!canChangeStep" href="javascript:;" class="btn btn btn-circle btn-icon-only red popovers" data-container="body"
+                                        data-trigger="hover" data-placement="top" data-content="{{stepFormErrorsDescription}}"
+                                        data-original-title="" title="">
+                                        <i class="fa fa-warning"></i>
+                                    </a>                                                                        
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputs">
                         <div class="portlet-input input-inline input-large">
                             <div class="input-group">
-                                <span class="input-group-btn" >
-                                    <a ng-show="!canChangeStep" href="javascript:;" class="btn btn btn-circle btn-icon-only red popovers" data-container="body" data-trigger="hover" data-placement="top"
-                                        data-content="{{unableToChangeStageDescription}}" data-original-title="" title="">
-                                                <i class="fa fa-warning"></i>
-                                    </a>                                                                       
-                                </span>
                                 <span class="input-group-btn">
                                     <button ng-disabled="!canChangeStep" type="button" ng-click="onMovePrevious()" class="btn btn-circle-left btn-default"> &lt; Previous</button>
                                 </span>
@@ -30,8 +47,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="portlet-body" ng-transclude></div>
             </div>
         </div>
+        <div class="portlet-body" ng-transclude></div>
     </div>
 </div>

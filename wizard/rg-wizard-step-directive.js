@@ -28,6 +28,14 @@ var rgWizardStepDirective = {
                     console.info(scope.stepFormName + ' ' + newVal);
                     scope.$parent.setCanChangeStep(newVal);
                 });
+
+                scope.$watch(scope.stepFormName + '.$dirty', function (newVal, oldVal) {
+                    if (!scope.canShow())
+                        return true;
+
+                    console.info(scope.stepFormName + ' ' + newVal);
+                    scope.$parent.setFormIsDirty(newVal);
+                });
             }
         };
     }

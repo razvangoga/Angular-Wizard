@@ -61,8 +61,10 @@
                     <div class="page-content-inner">
                         <div id="wizardContainer" ng-app="wizardApp" ng-controller="wizardController as c">
                             <rg-wizard data-wizard-name="Angular v1.5.8 Wizard" 
-                                data-wizard-description="with declarative, user customizable steps" 
-                                data-unable-to-change-stage-description="Fix validation errors to proceeed to next stage">
+                                data-wizard-description="with declarative, user customizable steps"
+                                data-step-form-ok-description="You have no changes to save"
+                                data-step-form-unsaved-changes-description="Proceed to next step to save your changes"
+                                data-step-form-errors-description="Fix validation errors to proceeed to next stage">
                                 <rg-wizard-step data-step-name="Name">
                                     <input type="text" ng-model="model.name" required class="form-control" />
                                 </rg-wizard-step>
