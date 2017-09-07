@@ -19,9 +19,10 @@ app.directive(rgWizardStepDirective.name, rgWizardStepDirective.directive);
 
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+    $httpProvider.defaults.headers.common["Content-Type"] = 'application/json';
 }]);
 
-app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $interval, toastr) {
+app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $interval, $log, toastr) {
     $scope.model = {};
     $scope.options = summernoteConfigurator().defaults;
 
@@ -30,7 +31,7 @@ app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $i
             $scope.model = response.data;
         },
         function () {
-            console.error(arguments);
+            $log.error(arguments);
         }
     );
 
@@ -40,5 +41,26 @@ app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $i
 
     this.deleteHobby = function (index) {
         $scope.model.hobbys.splice(index, 1);
+    };
+
+    this.save1 = function () {
+        this.save('save 1');
+    };
+
+    this.save2 = function () {
+        this.save('save 2');
+    };
+
+    this.save = function (saveName) {
+        $http.post('/save', $scope.model).then(
+            function (response) {
+                $log.info(response);
+                toastr.info('Saving your changes', saveName);
+            },
+            function () {
+                $log.error(arguments);
+                toastr.error('There as a problem loading the submission form.', 'Error', { "timeOut": 0, "extendedTimeOut": 0 })
+            }
+        );
     };
 });

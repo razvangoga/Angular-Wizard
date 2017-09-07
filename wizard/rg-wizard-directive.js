@@ -1,6 +1,6 @@
 var rgWizardDirective = {
     name: 'rgWizard',
-    directive: function () {
+    directive: function ($log) {
         return {
             restrict: 'E',
             replace: true,
@@ -12,7 +12,7 @@ var rgWizardDirective = {
             link: function (scope, elem, attrs) {
                 scope.wizardName = attrs.wizardName;
                 scope.wizardDescription = attrs.wizardDescription;
-                
+
                 scope.stepFormOkDescription = attrs.stepFormOkDescription;
                 scope.stepFormUnsavedChangesDescription = attrs.stepFormUnsavedChangesDescription;
                 scope.stepFormErrorsDescription = attrs.stepFormErrorsDescription;
@@ -21,29 +21,40 @@ var rgWizardDirective = {
                 scope.formIsDirty = false;
 
                 scope.steps = [];
+                scope.stepLeaveCallbacks = [];
 
-                var setCurrentStep = function (index) {
+                var setCurrentStep = function (index, invokeStepLeaveCallback = true) {
+
+                    if (invokeStepLeaveCallback && scope.formIsDirty) {
+                        var onStepLeaveCallback = scope.stepLeaveCallbacks[scope.currentStepIndex];
+                        onStepLeaveCallback();
+                    }
+
+                    if (index < scope.currentStepIndex && scope.currentStepIndex === 0)
+                        return;
+
+                    if (index > scope.currentStepIndex && scope.currentStepIndex === scope.steps.length - 1)
+                        return;
+
                     scope.currentStepIndex = index;
                     scope.currentStep = scope.steps[index];
                 };
 
-                scope.registerStep = function (stepName) {
+                scope.registerStep = function (stepName, onLeaveCallback) {
                     scope.steps.push(stepName);
-                    setCurrentStep(0);
+                    scope.stepLeaveCallbacks.push(onLeaveCallback);
+                    setCurrentStep(0, false);
                 };
 
-                scope.setCanChangeStep = function(show) {
+                scope.setCanChangeStep = function (show) {
                     scope.canChangeStep = show;
                 };
 
-                scope.setFormIsDirty = function(isDirty) {
+                scope.setFormIsDirty = function (isDirty) {
                     scope.formIsDirty = isDirty;
                 };
 
                 scope.onMovePrevious = function () {
-                    if (scope.currentStepIndex === 0)
-                        return;
-
                     setCurrentStep(scope.currentStepIndex - 1);
                 };
 
@@ -52,9 +63,6 @@ var rgWizardDirective = {
                 };
 
                 scope.onMoveNext = function () {
-                    if (scope.currentStepIndex === scope.steps.length - 1)
-                        return;
-
                     setCurrentStep(scope.currentStepIndex + 1);
                 };
 
