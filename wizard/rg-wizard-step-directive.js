@@ -40,6 +40,10 @@ var rgWizardStepDirective = {
                     scope.$parent.setFormIsDirty(newVal);
                 });
 
+                scope.getStepForm = function() {
+                    return scope[scope.stepFormName];
+                };
+
                 scope.$parent.registerStep(scope.name, scope.onLeaveStep);
             }
         };
