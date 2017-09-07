@@ -9,7 +9,7 @@ var rgWizardStepDirective = {
             transclude: true,
             replace: true,
             scope: {
-                onLeaveDefferedCallback: '&',
+                onLeaveCallback: '&',
                 model: '=',
             },
             templateUrl: '/wizard/rg-wizard-step-directive-template.html',
@@ -33,7 +33,7 @@ var rgWizardStepDirective = {
                 };
 
                 scope.onLeaveStep = function () {
-                    scope.onLeaveDefferedCallback()
+                    scope.onLeaveCallback()
                     scope.getStepForm().$setPristine();
                     scope.$parent.setFormIsDirty(false);
                 };
