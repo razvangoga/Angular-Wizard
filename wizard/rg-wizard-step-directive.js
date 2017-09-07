@@ -1,3 +1,5 @@
+'use strict';
+
 var rgWizardStepDirective = {
     name: 'rgWizardStep',
     directive: function ($log) {
@@ -16,13 +18,23 @@ var rgWizardStepDirective = {
                 scope.stepFormName = scope.name.replace(' ', '') + 'StepForm';
 
                 scope.canShow = function () {
-                    var show = scope.name === scope.$parent.currentStep;
+                    var show = scope.name === scope.$parent.currentStepName;
                     return show;
+                };
+
+                scope.onEnterStep = function() {
+                    if (!scope.canShow())
+                        return true;
+
+                    var stepForm = scope.getStepForm();
+
+                    if(!angular.isUndefined(stepForm))
+                        scope.$parent.setCanChangeStep(stepForm.$valid);
                 };
 
                 scope.onLeaveStep = function () {
                     scope.onLeaveDefferedCallback()
-                    eval('scope.' + scope.stepFormName + '.$setPristine()');
+                    scope.getStepForm().$setPristine();
                     scope.$parent.setFormIsDirty(false);
                 };
 
@@ -44,7 +56,11 @@ var rgWizardStepDirective = {
                     return scope[scope.stepFormName];
                 };
 
-                scope.$parent.registerStep(scope.name, scope.onLeaveStep);
+                scope.$parent.registerStep({
+                    name : scope.name, 
+                    onEnterStep : scope.onEnterStep,
+                    onLeaveStep : scope.onLeaveStep
+                });
             }
         };
     }

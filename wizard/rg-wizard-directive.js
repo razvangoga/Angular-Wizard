@@ -1,3 +1,5 @@
+'use strict';
+
 var rgWizardDirective = {
     name: 'rgWizard',
     directive: function ($log) {
@@ -21,14 +23,11 @@ var rgWizardDirective = {
                 scope.formIsDirty = false;
 
                 scope.steps = [];
-                scope.stepLeaveCallbacks = [];
 
                 var setCurrentStep = function (index, invokeStepLeaveCallback = true) {
 
-                    if (invokeStepLeaveCallback && scope.formIsDirty) {
-                        var onStepLeaveCallback = scope.stepLeaveCallbacks[scope.currentStepIndex];
-                        onStepLeaveCallback();
-                    }
+                    if (invokeStepLeaveCallback && scope.formIsDirty)
+                        scope.steps[scope.currentStepIndex].onLeaveStep();
 
                     if (index < scope.currentStepIndex && scope.currentStepIndex === 0)
                         return;
@@ -37,12 +36,13 @@ var rgWizardDirective = {
                         return;
 
                     scope.currentStepIndex = index;
-                    scope.currentStep = scope.steps[index];
+                    scope.currentStepName = scope.steps[index].name;
+
+                    scope.steps[scope.currentStepIndex].onEnterStep();
                 };
 
-                scope.registerStep = function (stepName, onLeaveCallback) {
-                    scope.steps.push(stepName);
-                    scope.stepLeaveCallbacks.push(onLeaveCallback);
+                scope.registerStep = function (step) {
+                    scope.steps.push(step);
                     setCurrentStep(0, false);
                 };
 
@@ -59,7 +59,12 @@ var rgWizardDirective = {
                 };
 
                 scope.onStepChanged = function () {
-                    setCurrentStep(scope.steps.indexOf(scope.currentStep));
+                    for (var i = 0; i < scope.steps.length; i++) {
+                        if (scope.steps[i].name === scope.currentStepName) {
+                            setCurrentStep(i);
+                            break;
+                        }
+                    }
                 };
 
                 scope.onMoveNext = function () {
