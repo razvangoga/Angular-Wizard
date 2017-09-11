@@ -61,7 +61,8 @@
                     <div class="page-content-inner">
                         <div id="wizardContainer" ng-app="wizardApp" ng-controller="wizardController as c">
                             <rg-wizard data-wizard-name="Angular v1.5.8 Wizard" data-wizard-description="with declarative, user customizable steps" data-step-form-ok-description="You have no changes to save"
-                                data-step-form-unsaved-changes-description="Proceed to next step to save your changes" data-step-form-errors-description="Fix validation errors to proceeed to next stage">
+                                data-step-form-unsaved-changes-description="Proceed to next step to save your changes" data-step-form-errors-description="Fix validation errors to proceeed to next stage"
+                                data-custom-step-header-class="some-custom-class">
                                 <rg-wizard-step data-step-name="Name" data-on-leave-deffered-callback="c.save1()">
                                     <div class="form-group" ng-class="{'has-error': $parent.getStepForm().$invalid}">
                                         <input type="text" name="name" ng-model="model.name" required class="form-control" />

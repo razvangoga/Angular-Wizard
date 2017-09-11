@@ -15,7 +15,7 @@ var rgWizardStepDirective = {
             templateUrl: '/wizard/rg-wizard-step-directive-template.html',
             link: function (scope, elem, attrs) {
                 scope.name = attrs.stepName;
-                scope.stepFormName = scope.name.replace(' ', '') + 'StepForm';
+                scope.stepFormName = scope.name.replace(/[\s|\W]/g, '') + 'StepForm';
 
                 scope.canShow = function () {
                     var show = scope.name === scope.$parent.currentStepName;

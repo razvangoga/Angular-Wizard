@@ -19,6 +19,8 @@ var rgWizardDirective = {
                 scope.stepFormUnsavedChangesDescription = attrs.stepFormUnsavedChangesDescription;
                 scope.stepFormErrorsDescription = attrs.stepFormErrorsDescription;
 
+                scope.customStepHeaderClass = attrs.customStepHeaderClass;
+
                 scope.canChangeStep = true;
                 scope.formIsDirty = false;
 
