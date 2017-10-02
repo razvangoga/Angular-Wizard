@@ -95,8 +95,8 @@
                                     <div ng-repeat="h in model.hobbys" class="form-group">
                                         <div class="row" ng-form="hobbysForm" ng-class="{'has-error': hobbysForm.$invalid}">
                                             <div class="col-md-6">
-                                                <input type="text" name="h" ng-model="h" required class="form-control" />
-                                                <span ng-show="hobbysForm.h.$error.required" class="help-block">
+                                                <input type="text" name="h" ng-model="h.name" required class="form-control" />
+                                                <span ng-show="hobbysForm.h.name.$error.required" class="help-block">
                                                         Required
                                                 </span>
                                             </div>

@@ -36,7 +36,7 @@ app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $i
     );
 
     this.addHobby = function () {
-        $scope.model.hobbys.push('');
+        $scope.model.hobbys.push({ name: '' });
     };
 
     this.deleteHobby = function (index) {
