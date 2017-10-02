@@ -52,6 +52,7 @@ app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $i
     };
 
     this.save = function (saveName) {
+        $log.info(saveName);
         $http.post('/save', $scope.model).then(
             function (response) {
                 $log.info(response);
