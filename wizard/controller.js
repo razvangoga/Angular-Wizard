@@ -10,12 +10,17 @@ var app = angular.module('wizardApp', ['summernote', 'googlechart', 'toastr'])
         gstaticLoaderVersion: 'current'
     });
 
+//other directives
 app.directive(convertToNumberDirective.name, convertToNumberDirective.directive);
 app.directive(isolatedFormDirective.name, isolatedFormDirective.directive);
 
 //wizard directives
 app.directive(rgWizardDirective.name, rgWizardDirective.directive);
 app.directive(rgWizardStepDirective.name, rgWizardStepDirective.directive);
+
+//wizard components
+// app.component(rgWizardDirective.name, rgWizardDirective.component);
+// app.component(rgWizardStepDirective.name, rgWizardStepDirective.component);
 
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
