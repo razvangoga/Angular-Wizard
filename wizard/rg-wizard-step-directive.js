@@ -107,11 +107,13 @@ var rgWizardStepDirective = {
                 });
 
                 scope.$watch(scope.stepFormName + '.$valid', function (newVal, oldVal) {
-                    scope.$parent.setCanChangeStep(newVal);
+                    if(scope.visible)
+                        scope.$parent.setCanChangeStep(newVal);
                 });
 
                 scope.$watch(scope.stepFormName + '.$dirty', function (newVal, oldVal) {
-                    scope.$parent.setFormIsDirty(newVal);
+                    if(scope.visible)
+                        scope.$parent.setFormIsDirty(newVal);
                 });
             }
         };

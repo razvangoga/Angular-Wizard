@@ -23,7 +23,9 @@ var model = {
     address: 'Krunska 51, Beograd 11000',
     hobbys: [
         { name: 'MTB Biking' },
-        { name: 'Beer drinking' }
+        { name: 'Beer drinking' },
+        { name: '' },
+        { name : ''}
     ]
 };
 
