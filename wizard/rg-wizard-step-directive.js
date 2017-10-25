@@ -67,6 +67,8 @@ var rgWizardStepDirective = {
             transclude: true,
             replace: true,
             scope: {
+                setFormDirtyOn: '@',
+                onEnterCallback: '&',
                 onLeaveCallback: '&',
                 model: '=',
             },
@@ -90,10 +92,16 @@ var rgWizardStepDirective = {
 
                     if (!angular.isUndefined(stepForm))
                         scope.$parent.setCanChangeStep(stepForm.$valid);
+
+                    if (!angular.isUndefined(scope.onEnterCallback))
+                        scope.onEnterCallback();
                 };
 
                 scope.onLeaveStep = function () {
-                    scope.onLeaveCallback();
+
+                    if (!angular.isUndefined(scope.onLeaveCallback))
+                        scope.onLeaveCallback();
+
                     scope.getStepForm().$setPristine();
                     scope.$parent.setFormIsDirty(false);
                 };
@@ -107,14 +115,20 @@ var rgWizardStepDirective = {
                 });
 
                 scope.$watch(scope.stepFormName + '.$valid', function (newVal, oldVal) {
-                    if(scope.visible)
+                    if (scope.visible)
                         scope.$parent.setCanChangeStep(newVal);
                 });
 
                 scope.$watch(scope.stepFormName + '.$dirty', function (newVal, oldVal) {
-                    if(scope.visible)
+                    if (scope.visible)
                         scope.$parent.setFormIsDirty(newVal);
                 });
+
+                if (!angular.isUndefined(scope.setFormDirtyOn))
+                    $rootScope.$on(scope.setFormDirtyOn, function () {
+                        if (scope.visible)
+                            scope.$parent.setFormIsDirty(true);
+                    });
             }
         };
     }
