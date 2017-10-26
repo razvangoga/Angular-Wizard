@@ -19,8 +19,8 @@ app.directive(rgWizardDirective.name, rgWizardDirective.directive);
 app.directive(rgWizardStepDirective.name, rgWizardStepDirective.directive);
 
 //wizard components
-// app.component(rgWizardDirective.name, rgWizardDirective.component);
-// app.component(rgWizardStepDirective.name, rgWizardStepDirective.component);
+// app.component(rgWizardComponent.name, rgWizardComponent.component);
+// app.component(rgWizardStepComponent.name, rgWizardStepComponent.component);
 
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
