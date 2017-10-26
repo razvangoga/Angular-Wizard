@@ -9,7 +9,7 @@ var rgWizardStepDirective = {
             transclude: true,
             replace: true,
             scope: {
-                toWatch: '@',
+                watchForChanges: '@',
                 setFormDirtyOn: '@',
                 onEnterCallback: '&',
                 onLeaveCallback: '&'
@@ -66,8 +66,8 @@ var rgWizardStepDirective = {
                         scope.$parent.setFormIsDirty(newVal);
                 });
 
-                if (!angular.isUndefined(scope.toWatch)) {
-                    var watchExpression = '$parent.$parent.' + scope.toWatch;
+                if (!angular.isUndefined(scope.watchForChanges)) {
+                    var watchExpression = '$parent.$parent.' + scope.watchForChanges;
                     scope.$watchCollection(watchExpression, function (newVal, oldVal) {
                         if (scope.visible)
                             scope.$parent.setFormIsDirty(true);
