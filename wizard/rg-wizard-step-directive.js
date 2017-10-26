@@ -67,11 +67,21 @@ var rgWizardStepDirective = {
                 });
 
                 if (!angular.isUndefined(scope.watchForChanges)) {
-                    var watchExpression = '$parent.$parent.' + scope.watchForChanges;
-                    scope.$watchCollection(watchExpression, function (newVal, oldVal) {
-                        if (scope.visible)
-                            scope.$parent.setFormIsDirty(true);
-                    });
+
+                    var watchExpressions = scope.watchForChanges.split('|');
+
+                    for (var i = 0; i < watchExpressions.length; i++) {
+                        var propertyToWatch = watchExpressions[i].trim();
+
+                        if (propertyToWatch.length === 0)
+                            continue;
+
+                        var watchExpression = '$parent.$parent.' + propertyToWatch;
+                        scope.$watchCollection(watchExpression, function (newVal, oldVal) {
+                            if (scope.visible)
+                                scope.$parent.setFormIsDirty(true);
+                        });
+                    }
                 }
 
                 if (!angular.isUndefined(scope.setFormDirtyOn))
