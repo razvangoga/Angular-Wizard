@@ -8,8 +8,7 @@ var rgWizardStepDirective = {
         },
         transclude: true,
         bindings: {
-            onLeaveCallback: '&',
-            model: '=',
+            onLeaveCallback: '&'
         },
         controller: function ($scope, $element, $attrs, $log) {
             $scope.name = $attrs.stepName;
@@ -60,17 +59,17 @@ var rgWizardStepDirective = {
             };
         }
     },
-    directive: function ($log) {
+    directive: function ($rootScope, $log) {
         return {
             restrict: 'E',
             require: '^rgWizard',
             transclude: true,
             replace: true,
             scope: {
+                toWatch: '@',
                 setFormDirtyOn: '@',
                 onEnterCallback: '&',
-                onLeaveCallback: '&',
-                model: '=',
+                onLeaveCallback: '&'
             },
             templateUrl: '/wizard/rg-wizard-step-directive-template.html',
             link: function (scope, elem, attrs) {
@@ -123,6 +122,14 @@ var rgWizardStepDirective = {
                     if (scope.visible)
                         scope.$parent.setFormIsDirty(newVal);
                 });
+
+                if (!angular.isUndefined(scope.toWatch)) {
+                    var watchExpression = '$parent.$parent.' + scope.toWatch;
+                    scope.$watchCollection(watchExpression, function (newVal, oldVal) {
+                        if (scope.visible)
+                            scope.$parent.setFormIsDirty(true);
+                    });
+                }
 
                 if (!angular.isUndefined(scope.setFormDirtyOn))
                     $rootScope.$on(scope.setFormDirtyOn, function () {

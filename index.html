@@ -90,7 +90,9 @@
                                 <rg-wizard-step data-step-name="Address" data-on-leave-callback="c.save2()">
                                     <summernote ng-model="model.address" config="options"></summernote>
                                 </rg-wizard-step>
-                                <rg-wizard-step data-step-name="Hobbys" data-on-leave-callback="c.save1()" data-last-step>
+                                <rg-wizard-step data-step-name="Hobbys" 
+                                    data-to-watch="model.hobbys"
+                                    data-on-leave-callback="c.save1()" data-last-step>
                                     <button type="button" ng-click="c.addHobby()">Add</button>
                                     <div ng-repeat="h in model.hobbys" class="form-group">
                                         <div class="row" ng-form="hobbysForm" ng-class="{'has-error': hobbysForm.$invalid}">
