@@ -28,7 +28,13 @@ var rgWizardDirective = {
                 scope.currentStepIndex = 0;
                 scope.currentStepName = '';
 
-                var setCurrentStep = function (index, invokeStepLeaveCallback = true, invokeStepEnterCallback = true) {
+                var setCurrentStep = function (index, invokeStepLeaveCallback, invokeStepEnterCallback) {
+
+                    if (angular.isUndefined(invokeStepLeaveCallback))
+                        invokeStepLeaveCallback = true;
+
+                    if (angular.isUndefined(invokeStepEnterCallback))
+                        invokeStepEnterCallback = true;
 
                     if (index < scope.currentStepIndex && scope.currentStepIndex === 0)
                         return;

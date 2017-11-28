@@ -91,6 +91,9 @@
                                         </span>
                                     </div>
                                 </rg-wizard-step>
+                                <rg-wizard-step data-step-name="Description" data-on-leave-callback="c.save2()">
+                                    <summernote ng-model="model.description" config="options"></summernote>
+                                </rg-wizard-step>
                                 <rg-wizard-step data-step-name="Address" data-on-leave-callback="c.save2()">
                                     <summernote ng-model="model.address" config="options"></summernote>
                                 </rg-wizard-step>

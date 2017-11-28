@@ -22,7 +22,13 @@ var rgWizardComponent = {
             $scope.currentStepIndex = 0;
             $scope.currentStepName = '';
 
-            var setCurrentStep = function (index, invokeStepLeaveCallback = true, triggerOnEnterStep = true) {
+            var setCurrentStep = function (index, invokeStepLeaveCallback, triggerOnEnterStep) {
+
+                if (angular.isUndefined(invokeStepLeaveCallback))
+                    invokeStepLeaveCallback = true;
+
+                if (angular.isUndefined(invokeStepEnterCallback))
+                    invokeStepEnterCallback = true;
 
                 if (index < $scope.currentStepIndex && $scope.currentStepIndex === 0)
                     return;
@@ -33,7 +39,7 @@ var rgWizardComponent = {
                 if (invokeStepLeaveCallback && $scope.formIsDirty)
                     $scope.steps[$scope.currentStepIndex].onLeaveStep();
 
-                if($scope.currentStepName !== '')
+                if ($scope.currentStepName !== '')
                     $scope.steps[$scope.currentStepIndex].setVisible(false);
 
                 $scope.currentStepIndex = index;
@@ -48,7 +54,7 @@ var rgWizardComponent = {
             this.registerStep = function (step) {
                 $scope.steps.push(step);
 
-                if(step.isLastStep)
+                if (step.isLastStep)
                     setCurrentStep(0, false, false);
             };
 

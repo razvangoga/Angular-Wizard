@@ -7,6 +7,11 @@ angular.module('summernote', [])
       var currentElement,
           summernoteConfig = angular.copy($scope.summernoteConfig) || {};
 
+      var emptyValue = null;
+
+      if(angular.isDefined(summernoteConfig.emptyValue))
+        emptyValue = summernoteConfig.emptyValue;
+
       if (angular.isDefined($attrs.height)) { summernoteConfig.height = +$attrs.height; }
       if (angular.isDefined($attrs.minHeight)) { summernoteConfig.minHeight = +$attrs.minHeight; }
       if (angular.isDefined($attrs.maxHeight)) { summernoteConfig.maxHeight = +$attrs.maxHeight; }
@@ -73,7 +78,7 @@ angular.module('summernote', [])
       this.activate = function (scope, element, ngModel) {
           var updateNgModel = function () {
               var newValue = element.summernote('code');
-              if (element.summernote('isEmpty')) { newValue = ''; }
+              if (element.summernote('isEmpty')) { newValue = emptyValue; }
               if (ngModel && ngModel.$viewValue !== newValue) {
                   $timeout(function () {
                       ngModel.$setViewValue(newValue);
@@ -85,7 +90,7 @@ angular.module('summernote', [])
           summernoteConfig.callbacks.onChange = function (contents) {
               $timeout(function () {
                   if (element.summernote('isEmpty')) {
-                      contents = '';
+                      contents = emptyValue;
                   }
                   updateNgModel();
               }, 0);
@@ -137,11 +142,11 @@ angular.module('summernote', [])
 
           if (ngModel) {
               ngModel.$render = function () {
-                  if (ngModel.$viewValue) {
+                  //if (ngModel.$viewValue) {
                       element.summernote('code', ngModel.$viewValue);
-                  } else {
-                      element.summernote('empty');
-                  }
+                  //} else {
+                  //    element.summernote('empty');
+                  //}
               };
           }
 

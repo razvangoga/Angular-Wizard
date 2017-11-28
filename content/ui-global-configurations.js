@@ -1,6 +1,7 @@
 ﻿var summernoteConfigurator = function () {
     var defaults = {
         height: 200,
+        emptyValue: null,
         maximumImageFileSize: 5 * 1024 * 1024, //5MB
         toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],

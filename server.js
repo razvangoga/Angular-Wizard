@@ -21,6 +21,7 @@ var model = {
     age: 33,
     email: 'kara@ben.nemsi',
     address: 'Krunska 51, Beograd 11000',
+    description : null,
     hobbys: [
         { name: 'MTB Biking' },
         { name: 'Beer drinking' },
