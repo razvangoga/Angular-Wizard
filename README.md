@@ -3,6 +3,8 @@
 
 This library contains a pair of angular directives that will allow you to easily split large forms into wizards.
 
+**This is my forst foray into more advanced Angular developemnt so comments / fixes / better practices / pull requests are most welcome :)**
+
 ## The main requirements for them were:
 1. Allow the refactoring of large existing forms to the wizard format 
 1. The content of each wizard step should constructed in the markup and all are bound to the same model object
@@ -51,3 +53,9 @@ This library contains a pair of angular directives that will allow you to easily
 * data-on-leave-callback - controller method that will be called when leaving the step when the form is dirty - intended to persist the changes made
 * data-last-step - add only to mark the last step
 * data-watch-for-changes - the name of the model collection that is displayed/interacted with in the step. We need to watch it separately as the form does not pick deleting from collections.
+
+## Still to do / nice to have
+* Transition from directives to components - i was not ableto get the step component to do the transclude content correctly. I think this may be related to the 1.5.8 version of Angular that was a hard requirement
+* Transition to Angular 2/4 and TypeScript
+* Make the template urls top level **rg-wizard component** parameters - at the moment thy are hardcoded in the directive's JS code
+* Add some animation for the startup - slow with large forms
