@@ -3,9 +3,11 @@
 
 This library contains a pair of angular directives that will allow you to easily split large forms into wizards.
 
+The library was started as a refactoring step in an existing fomrs-heavy non-SPA website aimed at having a better UX for large forms pages.
+
 **This is my forst foray into more advanced Angular developemnt so comments / fixes / better practices / pull requests are most welcome :)**
 
-## The main requirements for them were:
+## The main requirements for the components were:
 1. Allow the refactoring of large existing forms to the wizard format 
 1. The content of each wizard step should constructed in the markup and all are bound to the same model object
 1. A custom action should be triggered when exiting a step if the step's content is dirty
