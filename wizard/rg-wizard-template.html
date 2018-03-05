@@ -40,7 +40,7 @@
                                 <select ng-disabled="!canChangeStep" ng-change="onStepChanged()" ng-model="currentStepName" class="form-control">
                                     <option ng-repeat="s in steps">{{s.name}}</option>
                                 </select>
-                                <span class="input-group-btn">
+                                <span class="input-group-btn" ng-show="!currentStepIsLast">
                                     <button ng-disabled="!canChangeStep" type="button" ng-click="onMoveNext()" class="btn btn-right btn-default"> Next &gt;</button>
                                 </span>
                             </div>

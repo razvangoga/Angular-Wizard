@@ -27,6 +27,7 @@ var rgWizardDirective = {
                 scope.steps = [];
                 scope.currentStepIndex = 0;
                 scope.currentStepName = '';
+                scope.currentStepIsLast = false;
 
                 var setCurrentStep = function (index, invokeStepLeaveCallback, invokeStepEnterCallback) {
 
@@ -50,6 +51,7 @@ var rgWizardDirective = {
 
                     scope.currentStepIndex = index;
                     scope.currentStepName = scope.steps[index].name;
+                    scope.currentStepIsLast = scope.steps[index].isLastStep;
 
                     if (invokeStepEnterCallback)
                         scope.steps[scope.currentStepIndex].onEnterStep();
