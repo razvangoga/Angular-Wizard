@@ -5,7 +5,7 @@ var path = require('path');
 var app = express();
 var bodyParser = require('body-parser')
 
-app.set('port', 3000);
+app.set('port', 80);
 
 app.use(bodyParser.json());
 
