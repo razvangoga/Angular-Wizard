@@ -29,6 +29,8 @@ var rgWizardDirective = {
                 scope.currentStepName = '';
                 scope.currentStepIsLast = false;
 
+                scope.areAllStepsLoaded = false;
+
                 var setCurrentStep = function (index, invokeStepLeaveCallback, invokeStepEnterCallback) {
 
                     if (angular.isUndefined(invokeStepLeaveCallback))
@@ -61,7 +63,11 @@ var rgWizardDirective = {
 
                 scope.registerStep = function (step) {
                     scope.steps.push(step);
-                    setCurrentStep(0, false, false);
+                    
+                    if (step.isLastStep) {
+                        setCurrentStep(0, false, false);
+                        scope.areAllStepsLoaded = true;
+                    }
                 };
 
                 scope.setCanChangeStep = function (show) {

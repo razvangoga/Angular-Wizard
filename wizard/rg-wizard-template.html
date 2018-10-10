@@ -12,21 +12,21 @@
                         <div class="portlet-input input-inline input-xsmall">
                             <div class="input-group">
                                 <span class="input-group-btn pull-right">
-                                    <a ng-show="canChangeStep && !formIsDirty" href="javascript:;" class="btn btn-icon-only green popovers" data-container="body"
-                                        data-trigger="hover" data-placement="top" data-content="{{stepFormOkDescription}}"
+                                    <a ng-show="canChangeStep && !formIsDirty" href="javascript:;" class="btn btn-icon-only green popovers"
+                                        data-container="body" data-trigger="hover" data-placement="top" data-content="{{stepFormOkDescription}}"
                                         data-original-title="" title="">
                                         <i class="fa fa-check-circle"></i>
                                     </a>
-                                    <a ng-show="canChangeStep && formIsDirty" href="javascript:;" class="btn btn-icon-only btn-warning popovers" data-container="body"
-                                        data-trigger="hover" data-placement="top" data-content="{{stepFormUnsavedChangesDescription}}"
+                                    <a ng-show="canChangeStep && formIsDirty" href="javascript:;" class="btn btn-icon-only btn-warning popovers"
+                                        data-container="body" data-trigger="hover" data-placement="top" data-content="{{stepFormUnsavedChangesDescription}}"
                                         data-original-title="" title="">
                                         <i class="fa fa-warning"></i>
                                     </a>
-                                    <a ng-show="!canChangeStep" href="javascript:;" class="btn btn-icon-only red popovers" data-container="body"
-                                        data-trigger="hover" data-placement="top" data-content="{{stepFormErrorsDescription}}"
+                                    <a ng-show="!canChangeStep" href="javascript:;" class="btn btn-icon-only red popovers"
+                                        data-container="body" data-trigger="hover" data-placement="top" data-content="{{stepFormErrorsDescription}}"
                                         data-original-title="" title="">
                                         <i class="fa fa-warning"></i>
-                                    </a>                                                                        
+                                    </a>
                                 </span>
                             </div>
                         </div>
@@ -35,13 +35,16 @@
                         <div class="portlet-input input-inline input-xlarge">
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button ng-disabled="!canChangeStep" type="button" ng-click="onMovePrevious()" class="btn btn-left btn-default"> &lt; Previous</button>
+                                    <button ng-disabled="!canChangeStep" type="button" ng-click="onMovePrevious()"
+                                        class="btn btn-left btn-default"> &lt; Previous</button>
                                 </span>
-                                <select ng-disabled="!canChangeStep" ng-change="onStepChanged()" ng-model="currentStepName" class="form-control">
+                                <select ng-disabled="!canChangeStep" ng-change="onStepChanged()" ng-model="currentStepName"
+                                    class="form-control">
                                     <option ng-repeat="s in steps">{{s.name}}</option>
                                 </select>
                                 <span class="input-group-btn" ng-show="!currentStepIsLast">
-                                    <button ng-disabled="!canChangeStep" type="button" ng-click="onMoveNext()" class="btn btn-right btn-default"> Next &gt;</button>
+                                    <button ng-disabled="!canChangeStep" type="button" ng-click="onMoveNext()" class="btn btn-right btn-default">
+                                        Next &gt;</button>
                                 </span>
                             </div>
                         </div>

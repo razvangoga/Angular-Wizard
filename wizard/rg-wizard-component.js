@@ -22,6 +22,8 @@ var rgWizardComponent = {
             $scope.currentStepIndex = 0;
             $scope.currentStepName = '';
 
+            $scope.areAllStepsLoaded = false;
+
             var setCurrentStep = function (index, invokeStepLeaveCallback, triggerOnEnterStep) {
 
                 if (angular.isUndefined(invokeStepLeaveCallback))
@@ -54,8 +56,10 @@ var rgWizardComponent = {
             this.registerStep = function (step) {
                 $scope.steps.push(step);
 
-                if (step.isLastStep)
+                if (step.isLastStep) {
                     setCurrentStep(0, false, false);
+                    $scope.areAllStepsLoaded = true;
+                }
             };
 
             this.setCanChangeStep = function (show) {
