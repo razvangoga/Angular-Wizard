@@ -57,7 +57,7 @@ The library was started as a refactoring step in an existing fomrs-heavy non-SPA
 * data-watch-for-changes - the name of the model collection that is displayed/interacted with in the step. We need to watch it separately as the form does not pick deleting from collections.
 
 ## Still to do / nice to have
-* Transition from directives to components - i was not ableto get the step component to do the transclude content correctly. I think this may be related to the 1.5.8 version of Angular that was a hard requirement
+* Transition from directives to components - i was not able to get the step component to do the transclude content correctly. I think this may be related to the 1.5.8 version of Angular that was a hard requirement
 * Transition to Angular 2/4 and TypeScript
 * Make the template urls top level **rg-wizard component** parameters - at the moment thy are hardcoded in the directive's JS code
 * Add some animation for the startup - slow with large forms

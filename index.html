@@ -15,24 +15,24 @@
     <link href="/content/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
     <link href="/content/plugins.min.css" rel="stylesheet" type="text/css" />
 
-    <link href="/content/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
+    <link href="/content/bootstrap-summernote-latest/summernote.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
 
-    <script src="/content/jquery.min.js" type="text/javascript"></script>
-    <script src="/content/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/content/jquery.js" type="text/javascript"></script>
+    <script src="/content/bootstrap/js/bootstrap.js" type="text/javascript"></script>
 
 
     <script src="/content/ui-global-configurations.js" type="text/javascript"></script>
-    <script src="/content/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
+    <script src="/content/bootstrap-summernote-latest/summernote.js" type="text/javascript"></script>
     <script src="/content/angular.js" type="text/javascript"></script>
 
     <script src="/content/angular-custom-directives.js" type="text/javascript"></script>
-    <script src="/content/angular-summernote.js" type="text/javascript"></script>
+    <script src="/content/bootstrap-summernote-latest/angular-summernote.js" type="text/javascript"></script>
     <script src="/content/angular-google-chart.js" type="text/javascript"></script>
     <script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
 
-    <script src="/wizard/rg-wizard-component.js" type="text/javascript"></script>
-    <script src="/wizard/rg-wizard-step-component.js" type="text/javascript"></script>
+    <!-- <script src="/wizard/rg-wizard-component.js" type="text/javascript"></script>
+    <script src="/wizard/rg-wizard-step-component.js" type="text/javascript"></script> -->
 
     <script src="/wizard/rg-wizard-directive.js" type="text/javascript"></script>
     <script src="/wizard/rg-wizard-step-directive.js" type="text/javascript"></script>
@@ -70,10 +70,10 @@
                                 data-step-form-errors-description="Fix validation errors to proceeed to next stage"
                                 data-custom-step-header-class="some-custom-class">
                                 <div class="row" ng-show="!areAllStepsLoaded">
-                                        <div class="col-md-12 text-center">
-                                            <img src="wizard/spinner.svg" />
-                                        </div>
+                                    <div class="col-md-12 text-center">
+                                        <img src="wizard/spinner.svg" />
                                     </div>
+                                </div>
                                 <rg-wizard-step data-step-name="Name" data-on-leave-callback="c.save1()">
                                     <div class="form-group" ng-class="{'has-error': $parent.getStepForm().$invalid}">
                                         <input type="text" name="name" ng-model="model.name" required class="form-control" />
@@ -103,25 +103,6 @@
                                 </rg-wizard-step>
                                 <rg-wizard-step data-step-name="Address" data-on-leave-callback="c.save2()">
                                     <summernote ng-model="model.address" config="options"></summernote>
-                                </rg-wizard-step>
-                                <rg-wizard-step data-step-name="Hobbys" data-watch-for-changes="model.hobbys"
-                                    data-on-leave-callback="c.save1()" data-last-step>
-                                    <button type="button" ng-click="c.addHobby()">Add</button>
-                                    <div ng-repeat="h in model.hobbys" class="form-group">
-                                        <div class="row" ng-form="hobbysForm" ng-class="{'has-error': hobbysForm.$invalid}">
-                                            <div class="col-md-6">
-                                                <input type="text" name="h" ng-model="h.name" required class="form-control" />
-                                                <span ng-show="hobbysForm.h.name.$error.required" class="help-block">
-                                                    Required
-                                                </span>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <a class="btn red btn-sm" ng-click="c.deleteHobby($index)">
-                                                    <i class="fa fa-remove"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </rg-wizard-step>
                                 <rg-wizard-step data-step-name='Some Field 1' data-on-leave-callback='c.save2()'>
                                     <summernote ng-model='model.someField1' config='options'></summernote>
@@ -212,6 +193,25 @@
                                 </rg-wizard-step>
                                 <rg-wizard-step data-step-name='Some Field 30' data-on-leave-callback='c.save2()'>
                                     <summernote ng-model='model.someField30' config='options'></summernote>
+                                </rg-wizard-step>
+                                <rg-wizard-step data-step-name="Hobbys" data-watch-for-changes="model.hobbys"
+                                    data-on-leave-callback="c.save1()" data-last-step>
+                                    <button type="button" ng-click="c.addHobby()">Add</button>
+                                    <div ng-repeat="h in model.hobbys" class="form-group">
+                                        <div class="row" ng-form="hobbysForm" ng-class="{'has-error': hobbysForm.$invalid}">
+                                            <div class="col-md-6">
+                                                <input type="text" name="h" ng-model="h.name" required class="form-control" />
+                                                <span ng-show="hobbysForm.h.name.$error.required" class="help-block">
+                                                    Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a class="btn red btn-sm" ng-click="c.deleteHobby($index)">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </rg-wizard-step>
                             </rg-wizard>
                         </div>
