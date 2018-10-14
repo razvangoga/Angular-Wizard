@@ -95,6 +95,10 @@ var rgWizardDirective = {
                     setCurrentStep(scope.currentStepIndex + 1);
                 };
 
+                scope.onSave = function () {
+                    scope.steps[scope.currentStepIndex].onLeaveStep();
+                };
+
                 elem.find('.popovers').popover();
             }
         };
