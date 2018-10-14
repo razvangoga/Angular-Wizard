@@ -1,10 +1,12 @@
 <div ng-show="visible">
-    <h4 class="{{$parent.customStepHeaderClass}}">{{name}}</h4>
+    <h4 class="{{::$parent.customStepHeaderClass}}">{{::name}}</h4>
     <!-- <div>
-        <h4>{{stepFormName}}</h4>
+        <h5>Formname : [{{$parent.stepForm.name}}]</h5>
         <h5>pristine : {{getStepForm().$pristine}}</h5>
         <h5>dirty    : {{getStepForm().$dirty}}</h5>
         <h5>valid    : {{getStepForm().$valid}}</h5>
     </div> -->
-    <div ng-form="{{stepFormName}}" ng-transclude></div>
+    <div ng-form="{{::stepForm.name}}">
+        <div ng-if="visible" ng-transclude></div>
+    </div>
 </div>

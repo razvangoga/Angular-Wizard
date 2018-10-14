@@ -63,7 +63,7 @@ var rgWizardDirective = {
 
                 scope.registerStep = function (step) {
                     scope.steps.push(step);
-                    
+
                     if (step.isLastStep) {
                         setCurrentStep(0, false, false);
                         scope.areAllStepsLoaded = true;

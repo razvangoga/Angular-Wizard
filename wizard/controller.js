@@ -1,5 +1,9 @@
 'use strict';
 
+//RG 11 Oct 2018 - force the disable of the summernote helpDialog 
+//  rendered but never displayed due to the custom summernote configs
+$.summernote.options.modules.helpDialog = function(context) {};
+
 var app = angular.module('wizardApp', ['summernote', 'googlechart', 'toastr'])
     .value('googleChartApiConfig', {
         version: '1',

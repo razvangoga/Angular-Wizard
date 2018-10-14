@@ -77,7 +77,7 @@
                                 <rg-wizard-step data-step-name="Name" data-on-leave-callback="c.save1()">
                                     <div class="form-group" ng-class="{'has-error': $parent.getStepForm().$invalid}">
                                         <input type="text" name="name" ng-model="model.name" required class="form-control" />
-                                        <span ng-show="$parent.getStepForm().name.$error.required" class="help-block">
+                                        <span ng-show="$parent.$parent.getStepForm().name.$error.required" class="help-block">
                                             Required
                                         </span>
                                     </div>
