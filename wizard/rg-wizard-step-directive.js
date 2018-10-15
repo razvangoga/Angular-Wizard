@@ -18,7 +18,7 @@ var rgWizardStepDirective = {
             link: function (scope, elem, attrs) {
                 scope.name = attrs.stepName;
                 scope.stepForm = {
-                    name: scope.name.replace(/[\s|\W]/g, '') + 'StepForm'
+                    name: scope.name.replace(/[\s|\W\d]/g, '') + 'StepForm'
                 };
                 scope.visible = false;
                 this.isLastStep = !angular.isUndefined(attrs.lastStep);
