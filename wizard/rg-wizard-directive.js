@@ -31,6 +31,20 @@ var rgWizardDirective = {
 
                 scope.areAllStepsLoaded = false;
 
+                var afterLeave = function (index, invokeStepEnterCallback) {
+                    if (scope.currentStepName !== '')
+                        scope.steps[scope.currentStepIndex].setVisible(false);
+
+                    scope.currentStepIndex = index;
+                    scope.currentStepName = scope.steps[index].name;
+                    scope.currentStepIsLast = scope.steps[index].isLastStep;
+
+                    if (invokeStepEnterCallback)
+                        scope.steps[scope.currentStepIndex].onEnterStep();
+
+                    scope.steps[scope.currentStepIndex].setVisible(true);
+                };
+
                 var setCurrentStep = function (index, invokeStepLeaveCallback, invokeStepEnterCallback) {
 
                     if (angular.isUndefined(invokeStepLeaveCallback))
@@ -46,19 +60,11 @@ var rgWizardDirective = {
                         return;
 
                     if (invokeStepLeaveCallback && scope.formIsDirty)
-                        scope.steps[scope.currentStepIndex].onLeaveStep();
-
-                    if (scope.currentStepName !== '')
-                        scope.steps[scope.currentStepIndex].setVisible(false);
-
-                    scope.currentStepIndex = index;
-                    scope.currentStepName = scope.steps[index].name;
-                    scope.currentStepIsLast = scope.steps[index].isLastStep;
-
-                    if (invokeStepEnterCallback)
-                        scope.steps[scope.currentStepIndex].onEnterStep();
-
-                    scope.steps[scope.currentStepIndex].setVisible(true);
+                        scope.steps[scope.currentStepIndex].onLeaveStep().then(function () {
+                            afterLeave(index, invokeStepEnterCallback);
+                        });
+                    else
+                        afterLeave(index, invokeStepEnterCallback);
                 };
 
                 scope.registerStep = function (step) {

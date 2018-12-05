@@ -2,7 +2,7 @@
 
 var rgWizardStepDirective = {
     name: 'rgWizardStep',
-    directive: function ($rootScope, $log, $timeout) {
+    directive: function ($rootScope, $log, $timeout, $q) {
         return {
             restrict: 'E',
             require: '^rgWizard',
@@ -36,42 +36,42 @@ var rgWizardStepDirective = {
 
                     if (visible) {
                         $timeout(function () {
-                            scope.deregisterFormValidWatch = scope.$watch(scope.stepForm.name + '.$valid', function (newVal, oldVal) {
-                                scope.$parent.setCanChangeStep(newVal);
-                                //$log.info(scope.name, scope.$id, "watch valid", newVal, oldVal);
-                            });
-                            scope.deregisterFormDirtyWatch = scope.$watch(scope.stepForm.name + '.$dirty', function (newVal, oldVal) {
-                                scope.$parent.setFormIsDirty(newVal);
-                                //$log.info(scope.name, scope.$id, "watch dirty", newVal, oldVal);
-                            });
+                                scope.deregisterFormValidWatch = scope.$watch(scope.stepForm.name + '.$valid', function (newVal, oldVal) {
+                                    scope.$parent.setCanChangeStep(newVal);
+                                    //$log.info(scope.name, scope.$id, "watch valid", newVal, oldVal);
+                                });
+                                scope.deregisterFormDirtyWatch = scope.$watch(scope.stepForm.name + '.$dirty', function (newVal, oldVal) {
+                                    scope.$parent.setFormIsDirty(newVal);
+                                    //$log.info(scope.name, scope.$id, "watch dirty", newVal, oldVal);
+                                });
 
-                            if (!angular.isUndefined(scope.watchForChanges)) {
+                                if (!angular.isUndefined(scope.watchForChanges)) {
 
-                                var watchExpressions = scope.watchForChanges.split('|');
+                                    var watchExpressions = scope.watchForChanges.split('|');
 
-                                for (var i = 0; i < watchExpressions.length; i++) {
-                                    var propertyToWatch = watchExpressions[i].trim();
+                                    for (var i = 0; i < watchExpressions.length; i++) {
+                                        var propertyToWatch = watchExpressions[i].trim();
 
-                                    if (propertyToWatch.length === 0)
-                                        continue;
+                                        if (propertyToWatch.length === 0)
+                                            continue;
 
-                                    var watchExpression = '$parent.$parent.' + propertyToWatch;
-                                    scope.deregisterWatchCollection.push(scope.$watchCollection(watchExpression, function (newVal, oldVal) {
-                                        var equals = angular.equals(newVal, oldVal);
-                                        scope.$parent.setFormIsDirty(!equals);
-                                        //$log.info(scope.name, scope.$id, "watch collection dirty", equals, newVal, oldVal);
-                                    }));
+                                        var watchExpression = '$parent.$parent.' + propertyToWatch;
+                                        scope.deregisterWatchCollection.push(scope.$watchCollection(watchExpression, function (newVal, oldVal) {
+                                            var equals = angular.equals(newVal, oldVal);
+                                            scope.$parent.setFormIsDirty(!equals);
+                                            //$log.info(scope.name, scope.$id, "watch collection dirty", equals, newVal, oldVal);
+                                        }));
+                                    }
                                 }
-                            }
 
-                            //if the step was made invisible before we register the watches
-                            //deregister them
-                            if(!scope.visible)
-                                deregisterWatches();
+                                //if the step was made invisible before we register the watches
+                                //deregister them
+                                if (!scope.visible)
+                                    deregisterWatches();
 
-                        }, 
-                        //the 1s wait is to allow IE11 to catch up
-                        500);
+                            },
+                            //this wait is to allow IE11 to catch up
+                            500);
                     } else {
                         deregisterWatches();
                     }
@@ -101,12 +101,17 @@ var rgWizardStepDirective = {
                 };
 
                 scope.onLeaveStep = function () {
+                    var deferred = $q.defer();
+                    if (!angular.isUndefined(scope.onLeaveCallback)) {
+                        scope.onLeaveCallback().then(function () {
+                            scope.getStepForm().$setPristine();
+                            scope.$parent.setFormIsDirty(false);
 
-                    if (!angular.isUndefined(scope.onLeaveCallback))
-                        scope.onLeaveCallback();
+                            deferred.resolve(true);
+                        });
+                    }
 
-                    scope.getStepForm().$setPristine();
-                    scope.$parent.setFormIsDirty(false);
+                    return deferred.promise;
                 };
 
                 scope.$parent.registerStep({

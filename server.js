@@ -77,6 +77,11 @@ app.post('/save', function (req, res) {
     res.send(JSON.stringify({ status: 'Model Saved' }));
 });
 
+app.post('/fail', function (req, res) {
+    console.log(model);
+    res.status(500).json({ error: "Crash...." });
+});
+
 var server = app.listen(app.get('port'), function () {
     var port = server.address().port;
     console.log('nodeJS running on port : ' + port);

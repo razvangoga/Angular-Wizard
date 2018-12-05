@@ -31,7 +31,7 @@ app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.common["Content-Type"] = 'application/json';
 }]);
 
-app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $interval, $log, toastr) {
+app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $interval, $log, $q, toastr) {
     $scope.model = {};
     $scope.options = summernoteConfigurator().defaults;
 
@@ -53,24 +53,33 @@ app.controller('wizardController', function ($scope, $http, $attrs, $timeout, $i
     };
 
     this.save1 = function () {
-        this.save('save 1');
+        return this.save('save 1', '/save');
     };
 
     this.save2 = function () {
-        this.save('save 2');
+        return this.save('save 2', '/fail');
     };
 
-    this.save = function (saveName) {
-        $log.info(saveName);
-        $http.post('/save', $scope.model).then(
+    this.save = function (saveName, method) {
+        $log.info(saveName, method);
+
+        var deferred = $q.defer();
+
+        $http.post(method, $scope.model).then(
             function (response) {
                 $log.info(response);
                 toastr.info('Saving your changes', saveName);
+
+                return deferred.resolve(true);
             },
             function () {
                 $log.error(arguments);
-                toastr.error('There as a problem loading the submission form.', 'Error', { "timeOut": 0, "extendedTimeOut": 0 })
+                toastr.error('There as a problem loading the submission form.', 'Error', { "timeOut": 0, "extendedTimeOut": 0 });
+
+                deferred.reject(arguments);
             }
         );
+
+        return deferred.promise;
     };
 });
