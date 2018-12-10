@@ -19,7 +19,7 @@ The library was started as a refactoring step in an existing fomrs-heavy non-SPA
 1. Do not interfere with other custom directives used by the project (toastr, summernote, google charts, others)
 
 ## Instalation
-1. clone therepo
+1. clone the repo
 1. make sure you have the 2 prerequisets
    1. Angular 1.5.8
    1. Metronic or Twitter Bootstrap
@@ -60,4 +60,4 @@ The library was started as a refactoring step in an existing fomrs-heavy non-SPA
 * Transition from directives to components - i was not able to get the step component to do the transclude content correctly. I think this may be related to the 1.5.8 version of Angular that was a hard requirement
 * Transition to Angular 2/4 and TypeScript
 * Make the template urls top level **rg-wizard component** parameters - at the moment thy are hardcoded in the directive's JS code
-* Add some animation for the startup - slow with large forms
+* ~~Add some animation for the startup - slow with large forms~~ oct 14th 2018 : optimized startup / loading of pages
